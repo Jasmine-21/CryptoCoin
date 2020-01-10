@@ -12,7 +12,7 @@ function Heading()
                 </h1>
             </center>
             <div className="input-group input group-sm">
-                <input type="text" placeholder="Enter the Crypto Currency name" name="crypto" className="form-control"/>
+                <input type="text" placeholder="Enter the Crypto Currency Name" name="crypto" className="form-control"/>
                 <button className="btn btn-success btn-sm">
                     Get info about coin
                 </button>
