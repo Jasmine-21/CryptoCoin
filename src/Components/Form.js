@@ -12,7 +12,7 @@ export default class Form extends Component {
         searchedCoin: {}
     }
     componentDidMount() {
-        axios.get(`https://api.coingecko.com/api/v3/coins/list`).then(res => {
+        axios.get("https://api.coingecko.com/api/v3/coins/list").then(res => {
             this.setState(
                 {
                     loading: true,
@@ -22,6 +22,13 @@ export default class Form extends Component {
         })
     }
     handleChange = (e) => {
+        this.setState(
+            {
+                [e.target.name]: e.target.value
+            }
+        );
+    }
+    handleSubmit = (e) => {
         e.preventDefault();
         let obj = this.state.coins.data.filter(coin => {
             return coin.name === this.state.currency;
@@ -45,14 +52,14 @@ export default class Form extends Component {
                     <div>
                         <form className="Form" onSubmit={this.handleSubmit}>
                             <h1 className="Name">Crypto Wiki</h1>
-                            <input className="search-input mb-2" width="60px" 
-                            type="text" placeholder="Enter the Crypto Currency Name" name="currency" value={this.state.value} onChange={this.handleChange} 
-                           />
-                           <button type="submit" className="SearchButton btn btn-success ml-2"> Get Info About Coin</button>
+                            <input className="search-input mb-2" width="60px"
+                                type="text" placeholder="Enter the Crypto Currency Name" name="currency" value={this.state.value} onChange={this.handleChange}
+                            />
+                            <button type="submit" className="SearchButton btn btn-success ml-2"> Get Info About Coin</button>
                         </form>
-                        {!this.state.showData ? (<div> <p className="font-weight-bold text-center"> Search for a coin</p></div>) : (<DataCoin dataobj={this.state.searchedCoin} />)}
-                        
-        </div>
+                        {!this.state.showData ? (<div> <p className="font-weight-bold text-center"> Search for a coin</p></div>) : (<DataCoin objcoin={this.state.searchedCoin} />)}
+
+                    </div>
                 )
                 }
             </div>
