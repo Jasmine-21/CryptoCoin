@@ -12,3 +12,40 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.App .Form
+{
+  text-align: center;
+}
+.App .Form .search-input
+{
+  width: 40vw;
+height: 35px;
+}
+@media(max-width:600px)
+{
+  .App .Form .search-input
+  {
+    width: 50vw;
+  height: 35px;
+  } 
+}
+.result
+{
+  background-color: aquamarine;
+}
+.coin-title
+{
+  background-color: #5e8f9B;
+}
+.coin-title h3
+{
+cursor: pointer;
+}
+.result-table
+{
+  padding: 0px !important;
+}
+.result-table table tbody tr td{
+  padding-left: 10px;
+  padding-right: 20px;
+}
