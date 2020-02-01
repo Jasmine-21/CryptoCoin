@@ -1,68 +1,28 @@
 import React, { Component } from 'react';
-import axios from 'axios'
-import DataCoin from './DataCoin';
-import Load from './Load';
-
-export default class Form extends Component {
+class Form extends Component {
     state = {
-        currency: '',
-        loading: false,
-        showData: false,
-        coins: {},
-        searchedCoin: {}
+        name: null
     }
-    componentDidMount() {
-        axios.get("https://api.coingecko.com/api/v3/coins/list").then(res => {
-            this.setState(
-                {
-                    loading: true,
-                    coins: res
-                }
-            );
+    changeHandler = (e) => {
+        this.setState({
+            name: e.target.value
         })
     }
-    handleChange = (e) => {
-        this.setState(
-            {
-                [e.target.name]: e.target.value
-            }
-        );
-    }
-    handleSubmit = (e) => {
-        e.preventDefault();
-        let obj = this.state.coins.data.filter(coin => {
-            return coin.name === this.state.currency;
-        });
-        axios.get(`https://api.coingecko.com/api/v3/coins/${obj[0].id}`)
-            .then(res => {
-                this.setState({
-                    searchedCoin: res,
-                    showData: true
-                })
-            }).catch((err) => {
-                console.log(`An error has been occurred`);
-            });
-        console.log('Submit fired');
-    }
 
+    submitHandler = (e) => {
+        e.preventDefault();
+        this.props.add(this.state.name);
+    }
     render() {
         return (
-            <div>
-                {!this.state.loading ? (<Load />) : (
-                    <div>
-                        <form className="Form" onSubmit={this.handleSubmit}>
-                            <h1 className="Name">Crypto Wiki</h1>
-                            <input className="search-input mb-2" width="60px"
-                                type="text" placeholder="Enter the Crypto Currency Name" name="currency" value={this.state.value} onChange={this.handleChange}
-                            />
-                            <button type="submit" className="SearchButton btn btn-success ml-2"> Get Info About Coin</button>
-                        </form>
-                        {!this.state.showData ? (<div> <p className="font-weight-bold text-center"> Search for a coin</p></div>) : (<DataCoin objcoin={this.state.searchedCoin} />)}
-
-                    </div>
-                )
-                }
+            <div className="form">
+                <form onSubmit={this.submitHandler} >
+                    <input type="text" placeholder="Enter the Crypto Currency Name" className="form-input" 
+                    onChange={this.changeHandler.bind(this)}></input>
+                    <button className="form-btn">Get Info About Coin</button>
+                </form>
             </div>
         )
     }
 }
+export default Form;
