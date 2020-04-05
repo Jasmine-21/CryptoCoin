@@ -17,8 +17,8 @@ class Form extends Component {
         return (
             <div className="form">
                 <form onSubmit={this.submitHandler} >
-                    <input type="text" placeholder="Enter the Crypto Currency Name" className="form-input" 
-                    onChange={this.changeHandler.bind(this)}></input>
+                    <input type="text" placeholder="Enter the Crypto Currency Name" className="form-input"
+                        onChange={this.changeHandler.bind(this)}></input>
                     <button className="form-btn">Get Info About Coin</button>
                 </form>
             </div>

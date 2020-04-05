@@ -11,25 +11,24 @@ class DataCoin extends Component {
             }
         ]
     }
-    description="";
-    descr_elem="";
+    description = "";
+    descr_elem = "";
     nametolow = (name) => {
         let id = name.toLowerCase();
         return (id);
     }
     addcoin = (namereceived) => {
         const id = this.nametolow(namereceived);
-            fetch('https://api.coingecko.com/api/v3/coins/'+id)
+        fetch('https://api.coingecko.com/api/v3/coins/' + id)
             .then(response => response.json())
             .then(data => this.setState({ details: data }));
-             console.log(id)
-    } 
+        console.log(id)
+    }
     render() {
         const coins = this.state.details;
-        if(coins.name!=null)
-        {
-            this.description=coins.description.en;
-            this.descr_elem= ReactHtmlParser(this.description);
+        if (coins.name != null) {
+            this.description = coins.description.en;
+            this.descr_elem = ReactHtmlParser(this.description);
         }
         const Coindetails = (coins.name != null) ?
             (
@@ -38,7 +37,7 @@ class DataCoin extends Component {
                     <div className="panel-container">
                         <div className="panel-title">
                             <a href={coins.links.homepage[0]} target="blank">
-                            <span>{this.state.details.name}-{this.state.details.symbol}</span>
+                                <span>{this.state.details.name}-{this.state.details.symbol}</span>
                             </a>
                         </div>
                         <div className="panel-body">
